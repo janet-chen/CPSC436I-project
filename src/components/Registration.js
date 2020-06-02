@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 
-export default class Login extends Component {
+export default class Registration extends Component {
     constructor(props) {
         super(props);
         
         this.state = {
             email: "",
             password: "",
-            login_errors: ""
+            password_confirmation: "",
+            registration_errors: ""
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +16,7 @@ export default class Login extends Component {
     }
 
     handleSubmit(event) {
-        console.log("User Login");
+        console.log("User Registered");
         event.preventDefault();
     }
 
@@ -45,8 +46,16 @@ export default class Login extends Component {
                         onChange={this.handleChange} 
                         required 
                     />
+                    <input 
+                        type="password_confirmation" 
+                        name="password_confirmation" 
+                        placeholder="Confirm Password" 
+                        value={this.state.password_confirmation} 
+                        onChange={this.handleChange} 
+                        required 
+                    />
 
-                    <button type="submit">Login</button>
+                    <button type="submit">Register</button>
                 </form>
             </div>
         )
