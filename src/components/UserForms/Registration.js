@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './UserForms.css'
 
 export default class Registration extends Component {
     constructor(props) {
@@ -28,7 +29,8 @@ export default class Registration extends Component {
 
     render() {
         return (
-            <div>
+            <div className="registration">
+                Register
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         type="email" 
