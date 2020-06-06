@@ -6,8 +6,7 @@ import MyCalendar from './Calendar';
 import Searchbar from './Searchbar';
 import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display/Display';
-
-
+import Media from './Media/Media'
 function App() {
   return (
     <div>
