@@ -17,6 +17,7 @@ function App() {
       <Display />
       <SaveColumn />
       <MyCalendar />
+      <Media />
     </div>
   );
 }
