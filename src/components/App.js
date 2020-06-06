@@ -3,6 +3,7 @@ import './App.css';
 import Login from './UserForms/Login';
 import Registration from './UserForms/Registration';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Media from './Media/Media';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Registration} />
       </Switch>
+
+      <Media />
 
     </Router>
   );
