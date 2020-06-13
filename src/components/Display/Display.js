@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Display.css'
+import Media from '../Media/Media';
 
 export default class Registration extends Component {
     constructor(props) {
@@ -12,7 +13,42 @@ export default class Registration extends Component {
     render() {
         return (
             <div className="display">
-                Loaded content
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
+                <Media />
             </div>
         )
     }
