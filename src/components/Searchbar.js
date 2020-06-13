@@ -2,42 +2,19 @@ import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
-    width: 400,
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));
 
 
-// export default class Searchbar extends Component {    
+export default class Searchbar extends Component {    
 
-//   constructor(props) {
+  constructor(props) {
 
-//     super(props);
-//     this.state = {value: ''};
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
+    super(props);
+    this.state = {value: ''};
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
 //   handleSubmit(event) {
 //       console.log("Search: " + this.state.value);
@@ -50,33 +27,50 @@ const useStyles = makeStyles((theme) => ({
 //       })
 //   }
 
-export default function Searchbar() {
 
-  const classes = useStyles();
+// export default function Searchbar() {
+
+  classes = makeStyles((theme) => ({
+    root: {
+      padding: '2px 4px',
+      display: 'flex',
+      alignItems: 'center',
+      width: 400,
+    },
+    input: {
+      marginLeft: theme.spacing(1),
+      flex: 1,
+    },
+    iconButton: {
+      padding: 10,
+    },
+  }));
 
 
-  return (
-    // <form onSubmit={this.handleSubmit}>
-    //   <input id="submitText" type="text" value={this.state.value} onChange={this.handleChange}/>
-    //   <button onClick={() => this.handleSubmit}>Search</button>
-    // </form>
-    <Paper component="form" className={classes.root}>
-      {/* <IconButton className={classes.iconButton} aria-label="menu">
-        <MenuIcon />
-      </IconButton> */}
+  handleSubmit = (event) => {
+    console.log("hello");
+    event.preventDefault();
+  }
+
+  handleChange = (event) => {
+      this.setState({
+          value: event.target.value
+      })
+  }
+
+  render() {return (
+    <Paper component="form" className={this.classes.root} onSubmit={this.handleSubmit}>
       <InputBase
-        className={classes.input}
+        className={this.classes.input}
         placeholder="Location"
         inputProps={{ 'aria-label': 'search google maps' }}
+        // onChange={handleChange}
       />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search">
+      <IconButton type="submit" className={this.classes.iconButton} aria-label="search">
         <SearchIcon />
       </IconButton>
-      {/* <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="directions">
-        <DirectionsIcon />
-      </IconButton> */}
     </Paper>
   );
+  }
 
 }
