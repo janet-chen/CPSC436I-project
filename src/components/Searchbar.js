@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import setSearch from '../actions/index';
 
-export default class Searchbar extends Component {
+class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -9,14 +11,15 @@ export default class Searchbar extends Component {
   }
 
   handleSubmit(event) {
-      console.log("Search: " + this.state.value);
-      event.preventDefault();
+    this.props.submitSearch(this.state.value);
+    console.log("Search: " + this.state.value);
+    event.preventDefault();
   }
 
   handleChange(event) {
-      this.setState({
-          value: event.target.value
-      })
+    this.setState({
+      value: event.target.value
+    })
   }
 
   render() {
@@ -28,3 +31,23 @@ export default class Searchbar extends Component {
     );
   }
 }
+
+// this prop isn't being used in this component.
+// Need to figure out how to use the connect() function without having to implement mapStateToProps.
+const mapStateToProps = (state) => {
+  return {
+    query: state.submittedSearch.currentSearch
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitSearch: (destination) => {
+      dispatch(setSearch(destination));
+    }
+  };
+};
+
+const SearchbarContainer = connect(mapStateToProps, mapDispatchToProps)(Searchbar);
+
+export default SearchbarContainer;
