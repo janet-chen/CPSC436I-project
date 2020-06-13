@@ -32,14 +32,6 @@ class Searchbar extends Component {
   }
 }
 
-// this prop isn't being used in this component.
-// Need to figure out how to use the connect() function without having to implement mapStateToProps.
-const mapStateToProps = (state) => {
-  return {
-    query: state.submittedSearch.currentSearch
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     submitSearch: (destination) => {
@@ -48,6 +40,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const SearchbarContainer = connect(mapStateToProps, mapDispatchToProps)(Searchbar);
+const SearchbarContainer = connect(null, mapDispatchToProps)(Searchbar);
 
 export default SearchbarContainer;
