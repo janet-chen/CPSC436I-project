@@ -6,17 +6,19 @@ import MyCalendar from './Calendar';
 import Searchbar from './Searchbar';
 import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display/Display';
+import NavBar from './NavBar';
 
 
 function App() {
   return (
     <div>
-      <Login />
+      <NavBar />
+      {/* <Login />
       <Registration />
       <Searchbar />
       <Display />
       <SaveColumn />
-      <MyCalendar />
+      <MyCalendar /> */}
     </div>
   );
 }

@@ -14,7 +14,7 @@ input {
     padding: 0.25em 0;
 }
 
-button {
+.userform button {
     background-color: #33cc33;
     border-color: #99ff99;
     color: #FFFFFF;
@@ -29,7 +29,7 @@ button:hover {
     cursor: pointer;
 }
 
-div {
+.userform {
     text-align: center;
     margin: 1em;
 }

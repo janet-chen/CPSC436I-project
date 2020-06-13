@@ -9,9 +9,9 @@ import reducers from './reducers';
 
 ReactDOM.render(
   <Provider store={createStore(reducers)}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <App />
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>,
   document.getElementById('root')
 );
