@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './SaveColumn.css'
+import Media from '../Media/Media'
 
 export default class Registration extends Component {
     constructor(props) {
@@ -13,6 +14,10 @@ export default class Registration extends Component {
         return (
             <div className="saveColumn">
                 Your Favourites
+                <br></br>
+                <Media />
+                <Media />
+                <Media />
             </div>
         )
     }
