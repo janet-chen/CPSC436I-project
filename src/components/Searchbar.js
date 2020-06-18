@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,7 +24,6 @@ const styles = theme => ({
 class Searchbar extends Component {    
 
   constructor(props) {
-
     super(props);
     this.state = {value: ''};
   }
