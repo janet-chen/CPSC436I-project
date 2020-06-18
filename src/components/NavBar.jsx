@@ -11,19 +11,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import travelr from '../travelr.svg';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
   },
   sectionDesktop: {
     display: 'none',
@@ -37,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
   navButton: {
     "margin-right": 20,
     "margin-top": "5px"
+  },
+  logo: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   }
 }));
 
@@ -78,9 +76,11 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.navBar}>
         <Toolbar>
+          <Link to="/" className={classes.logo}>
+            <img src={travelr} />
+          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
             </Link>
