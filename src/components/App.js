@@ -7,20 +7,33 @@ import Searchbar from './Searchbar.js';
 import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display/Display';
 import NavBar from './NavBar';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 
 function App() {
   return (
-    <div>
+    <Router>
       <NavBar />
       <Searchbar />
-      {/* <Login />
-      <Registration />
-      <Searchbar />
-      <Display />
-      <SaveColumn />
-      <MyCalendar /> */}
-    </div>
+      {/* <Link to="/" >
+        <h3>Home</h3>
+      </Link>
+      <Link to="/login" >
+        <h3>Login</h3>
+      </Link>
+      <Link to="/register" >
+        <h3>Register</h3>
+      </Link> */}
+
+      <Switch>
+        <Route path="/" component={null} exact />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Registration} />
+      </Switch>
+
+    </Router>
+
+
   );
 }
 

@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -76,8 +77,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link to="/login">
+        <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+      </Link>
+      <Link to="/register">
+        <MenuItem onClick={handleMenuClose}>Register</MenuItem>
+      </Link>
     </Menu>
   );
 
