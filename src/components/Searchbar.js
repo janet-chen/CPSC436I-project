@@ -29,7 +29,7 @@ class Searchbar extends Component {
   }
   
   handleSubmit = (event) => {
-    console.log("hello");
+    console.log(this.state.value);
     event.preventDefault();
   }
   
@@ -45,9 +45,9 @@ class Searchbar extends Component {
     <Paper component="form" className={classes.root} onSubmit={this.handleSubmit}>
       <InputBase
         className={classes.input}
-        placeholder="Location"
+        placeholder="Literally anywhere"
         inputProps={{ 'aria-label': 'search google maps' }}
-        // onChange={handleChange}
+        onChange={this.handleChange}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />

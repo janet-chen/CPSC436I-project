@@ -4,7 +4,7 @@ form {
     margin: 1em auto;
 }
 
-input {
+.userform input {
     display: table;
     text-align: center;
     margin-left: auto;
