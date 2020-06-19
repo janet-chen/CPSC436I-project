@@ -13,6 +13,8 @@ import japanImg from '../img/japan.png';
 import greeceImg from '../img/greece.png';
 import romaniaImg from '../img/romania.png';
 import nzImg from '../img/newzealand.png';
+import Santorini from '../img/greece-santorini.png';
+import Zakynthos from '../img/greece-zakynthos.png';
 
 const useStyles = makeStyles({
   root: {
@@ -46,7 +48,7 @@ export default function LandingPage() {
       justify="center"
       alignContent="center"
       >
-        <Grid item xs={5}>
+        <Grid item xs={4}>
             <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -65,7 +67,7 @@ export default function LandingPage() {
             </Card>
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item xs={4}>
             <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -83,7 +85,43 @@ export default function LandingPage() {
               </CardActions>
             </Card>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
+            <Card className={classes.root}>
+              <CardMedia
+                component="img"
+                height="240"
+                image={Santorini}
+                title="Santorini"
+              />
+              <CardContent>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Santorini</Button>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={4}>
+            <Card className={classes.root}>
+              <CardMedia
+                component="img"
+                height="240"
+                image={Zakynthos}
+                title="Zakynthos"
+              />
+              <CardContent>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Zakynthos</Button>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={4}>
             <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -101,7 +139,7 @@ export default function LandingPage() {
               </CardActions>
             </Card>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <Card className={classes.root}>
               <CardMedia
                 component="img"
