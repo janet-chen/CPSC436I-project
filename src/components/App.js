@@ -7,6 +7,7 @@ import Searchbar from './Searchbar.js';
 import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display/Display';
 import NavBar from './NavBar';
+import LandingPage from './LandingPage';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 
@@ -16,7 +17,7 @@ function App() {
       <NavBar />
       <Searchbar />
       <Switch>
-        <Route path="/" component={null} exact />
+        <Route path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
