@@ -98,7 +98,6 @@ export default function PrimarySearchAppBar() {
             >
               <AccountCircle />
             </IconButton>
-
           </div>
         </Toolbar>
       </AppBar>

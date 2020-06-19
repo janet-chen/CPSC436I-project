@@ -15,16 +15,6 @@ function App() {
     <Router>
       <NavBar />
       <Searchbar />
-      {/* <Link to="/" >
-        <h3>Home</h3>
-      </Link>
-      <Link to="/login" >
-        <h3>Login</h3>
-      </Link>
-      <Link to="/register" >
-        <h3>Register</h3>
-      </Link> */}
-
       <Switch>
         <Route path="/" component={null} exact />
         <Route path="/login" component={Login} />
