@@ -1,8 +1,13 @@
-const setSearch = (destination) => {
+export const setSearch = (destination) => {
   return {
     type: 'SET',
     newSearch: destination
   };
 };
 
-export default setSearch;
+export const saveResults = (imageUrls) => {
+  return {
+    type: 'SAVE',
+    queryResults: imageUrls
+  };
+};
