@@ -3,17 +3,18 @@ import './App.css';
 import Login from './UserForms/Login';
 import Registration from './UserForms/Registration';
 import MyCalendar from './Calendar';
-import Searchbar from './Searchbar';
+import SearchbarContainer from './Searchbar';
 import SaveColumn from './SaveColumn/SaveColumn';
-import Display from './Display/Display';
-import Media from './Media/Media'
+import DisplayContainer from './Display/Display';
+import Media from './Media/Media';
+
 function App() {
   return (
     <div>
       <Login />
       <Registration />
-      <Searchbar />
-      <Display />
+      <SearchbarContainer />
+      <DisplayContainer />
       <SaveColumn />
       <MyCalendar />
       <Media />

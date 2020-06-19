@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import setSearch from '../actions/index';
 
-export default class Searchbar extends Component {
+class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -9,14 +11,15 @@ export default class Searchbar extends Component {
   }
 
   handleSubmit(event) {
-      console.log("Search: " + this.state.value);
-      event.preventDefault();
+    this.props.submitSearch(this.state.value);
+    console.log("Search: " + this.state.value);
+    event.preventDefault();
   }
 
   handleChange(event) {
-      this.setState({
-          value: event.target.value
-      })
+    this.setState({
+      value: event.target.value
+    })
   }
 
   render() {
@@ -28,3 +31,15 @@ export default class Searchbar extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitSearch: (destination) => {
+      dispatch(setSearch(destination));
+    }
+  };
+};
+
+const SearchbarContainer = connect(null, mapDispatchToProps)(Searchbar);
+
+export default SearchbarContainer;
