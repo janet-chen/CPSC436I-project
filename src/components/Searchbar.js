@@ -1,4 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+
 import { connect } from 'react-redux';
 import { setSearch, saveResults } from '../actions/index';
 import Unsplash, { toJson } from 'unsplash-js';
@@ -10,52 +16,21 @@ const unsplash = new Unsplash(
     secret: SECRET_KEY
   });
 
-class Searchbar extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      value: '',
-      image: null
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit (event) {
-    this.props.submitSearch(this.state.value);
-    unsplash.search.photos(this.state.value, 1, 10, { orientation: 'portrait' })
-      .then(toJson)
-      .then(json => {
-        let extractUrls = function ({ urls }) { return { urls }; };
-        const imageSubset = json.results.slice(0, 10);
-        const urls = imageSubset.map(imgObject => extractUrls(imgObject));
-        this.props.submitResults(urls);
-        this.setState({
-          image: json.results[0].urls.small
-        });
-      });
-    event.preventDefault();
-  }
-
-  handleChange (event) {
-    this.setState({
-      value: event.target.value
-    });
-  }
-
-  render () {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input id='submitText' type='text' value={this.state.value} onChange={this.handleChange} />
-          <button onClick={() => this.handleSubmit}>Search</button>
-        </form>
-        <img src={this.state.image} alt='Destination Image' />
-      </div>
-
-    );
-  }
-}
+const styles = theme => ({
+  root: {
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -68,6 +43,48 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const SearchbarContainer = connect(null, mapDispatchToProps)(Searchbar);
+class Searchbar extends Component {    
 
-export default SearchbarContainer;
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+  }
+  
+  handleSubmit = (event) => {
+    this.props.submitSearch(this.state.value);
+    unsplash.search.photos(this.state.value, 1, 10, { orientation: 'portrait' })
+      .then(toJson)
+      .then(json => {
+        let extractUrls = function ({ urls }) { return { urls }; };
+        const imageSubset = json.results.slice(0, 10);
+        const urls = imageSubset.map(imgObject => extractUrls(imgObject));
+        this.props.submitResults(urls);
+      });
+    event.preventDefault();
+  }
+  
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value
+    })
+  }
+  
+  render() {
+    const { classes } = this.props;
+    return (
+    <Paper component="form" className={classes.root} onSubmit={this.handleSubmit}>
+      <InputBase
+        className={classes.input}
+        placeholder="Literally anywhere"
+        inputProps={{ 'aria-label': 'search google maps' }}
+        onChange={this.handleChange}
+        />
+      <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <SearchIcon />
+      </IconButton>
+    </Paper>
+    )
+  
+  }
+}
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Searchbar));
