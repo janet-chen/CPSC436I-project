@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { setSearch, saveResults } from '../actions/index';
@@ -61,6 +62,7 @@ class Searchbar extends Component {
         this.props.submitResults(urls);
       });
     event.preventDefault();
+    this.props.history.push("/results");
   }
   
   handleChange = (event) => {
@@ -87,4 +89,5 @@ class Searchbar extends Component {
   
   }
 }
+
 export default connect(null, mapDispatchToProps)(withStyles(styles)(Searchbar));
