@@ -70,7 +70,7 @@ class LandingPage extends Component {
     this.state = {
     };
   }
-
+  return (
   render() {
     const classes = this.props;
     return (

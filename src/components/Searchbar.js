@@ -63,6 +63,9 @@ class Searchbar extends Component {
       });
     event.preventDefault();
     this.props.history.push("/results");
+    this.setState({
+      value: ''
+    })
   }
   
   handleChange = (event) => {
@@ -80,6 +83,7 @@ class Searchbar extends Component {
         placeholder="Literally anywhere"
         inputProps={{ 'aria-label': 'search google maps' }}
         onChange={this.handleChange}
+        value={this.state.value}
         />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />
