@@ -24,7 +24,7 @@ const styles = makeStyles => ({
     alignItems: 'center',
     alignContent: 'center',
     direction: 'row',
-    flexwrap: 'wrap'
+    // flexwrap: 'wrap'
   }
   // pos: {
   //   marginBottom: 12,
