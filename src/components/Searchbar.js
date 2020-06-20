@@ -29,7 +29,7 @@ const styles = theme => ({
     flex: 1,
   },
   iconButton: {
-    padding: 10,
+    padding: 12,
   },
 });
 
