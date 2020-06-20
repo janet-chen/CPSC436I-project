@@ -1,8 +1,0 @@
-.display {
-    width: 800px;
-    display: flex;
-    flex-wrap: wrap;
-    border-style: solid;
-    border-width: 1px; 
-    padding: 0px 0px 100px 0px;
-}
