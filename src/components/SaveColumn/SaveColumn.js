@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './SaveColumn.css'
-import Media from '../Media/Media'
+// import Media from '../Media/Media'
 
 export default class Registration extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
         };
     }
@@ -15,9 +15,6 @@ export default class Registration extends Component {
             <div className="saveColumn">
                 Your Favourites
                 <br></br>
-                <Media />
-                <Media />
-                <Media />
             </div>
         )
     }

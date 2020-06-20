@@ -10,7 +10,6 @@ import Display from './Display';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Calendar from 'react-calendar';
 
 
 function App() {
@@ -23,9 +22,9 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
-        <Route path="/calendar" component={Calendar} />
+        <Route path="/calendar" component={MainCalendar} />
       </Switch>
-
+      <CPopper />
     </Router>
 
 
