@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
+import initialImages from '../initialImages';
 
 const defaultSearchState = {
   currentSearch: '',
-  savedImages: []
+  savedImages: initialImages
 };
 
 const searchReducer = (state = defaultSearchState, action) => {
@@ -23,6 +24,10 @@ const saveImagesReducer = (state = defaultSearchState, action) => {
       return {
         currentSearch: state.currentSearch,
         savedImages: [...action.queryResults]
+      };
+    case 'CLEAR':
+      return {
+        savedImages: []
       };
     default:
       return state;

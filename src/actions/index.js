@@ -11,3 +11,9 @@ export const saveResults = (imageUrls) => {
     queryResults: imageUrls
   };
 };
+
+export const clearResults = () => {
+  return {
+    type: 'CLEAR'
+  };
+};
