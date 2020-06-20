@@ -5,7 +5,7 @@ import Registration from './UserForms/Registration';
 import MyCalendar from './Calendar';
 import Searchbar from './Searchbar.js';
 import SaveColumn from './SaveColumn/SaveColumn';
-import Display from './Display/Display';
+import Display from './Display';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
