@@ -53,16 +53,19 @@ class Searchbar extends Component {
   
   handleSubmit = (event) => {
     this.props.submitSearch(this.state.value);
-    unsplash.search.photos(this.state.value, 1, 10, { orientation: 'landscape' })
+    unsplash.search.photos(this.state.value, 1, 12, { orientation: 'landscape' })
       .then(toJson)
       .then(json => {
         let extractUrls = function ({ urls }) { return { urls }; };
-        const imageSubset = json.results.slice(0, 10);
+        const imageSubset = json.results.slice(0, 12);
         const urls = imageSubset.map(imgObject => extractUrls(imgObject));
         this.props.submitResults(urls);
       });
     event.preventDefault();
     this.props.history.push("/results");
+    this.setState({
+      value: ''
+    })
   }
   
   handleChange = (event) => {
@@ -80,6 +83,7 @@ class Searchbar extends Component {
         placeholder="Literally anywhere"
         inputProps={{ 'aria-label': 'search google maps' }}
         onChange={this.handleChange}
+        value={this.state.value}
         />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />
