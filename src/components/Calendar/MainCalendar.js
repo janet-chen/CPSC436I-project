@@ -21,6 +21,9 @@ const appointments = [
   { startDate: '2020-06-20T12:00', endDate: "2020-06-20T15:45", title: 'Go to a museum' },
 ];
 
+/* Referenced from
+https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/getting-started/
+*/
 export default class MainCalendar extends Component {
   render() {
     return (
