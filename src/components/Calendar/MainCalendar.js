@@ -17,8 +17,8 @@ import {
 
 const currentDate = '2020-06-20';
 const appointments = [
-  { startDate: '2020-06-19T09:45', endDate: "2020-06-19T14:45", title: 'Meeting' },
-  { startDate: '2020-06-20T12:00', endDate: "2020-06-20T15:45", title: 'Go to a gym' },
+  { startDate: '2020-06-19T09:45', endDate: "2020-06-19T14:45", title: 'Hiking' },
+  { startDate: '2020-06-20T12:00', endDate: "2020-06-20T15:45", title: 'Go to a museum' },
 ];
 
 export default class MainCalendar extends Component {
