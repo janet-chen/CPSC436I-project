@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { setSearch, saveResults } from '../actions/index';
+import { setSearch, saveResults, clearResults } from '../actions/index';
 import Unsplash, { toJson } from 'unsplash-js';
 const APP_ACCESS_KEY = 'adYDaJCisGClWz_PnSuJJiuzl1hItt3kKGxKLePeYPA';
 const SECRET_KEY = 'KFaS1rVbg4l9G1OJ1TSVCL2mYnDMl9c-5wi8puO2Bjo';
@@ -40,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     submitResults: (imageUrls) => {
       dispatch(saveResults(imageUrls));
+    },
+    clearPrevResults: () => {
+      dispatch(clearResults());
     }
   };
 };
@@ -52,6 +55,7 @@ class Searchbar extends Component {
   }
   
   handleSubmit = (event) => {
+    this.props.clearPrevResults();
     this.props.submitSearch(this.state.value);
     unsplash.search.photos(this.state.value, 1, 12, { orientation: 'landscape' })
       .then(toJson)
