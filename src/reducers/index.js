@@ -22,7 +22,7 @@ const saveImagesReducer = (state = defaultSearchState, action) => {
     case 'SAVE':
       return {
         currentSearch: state.currentSearch,
-        savedImages: [...state.savedImages, ...action.queryResults]
+        savedImages: [...action.queryResults]
       };
     default:
       return state;

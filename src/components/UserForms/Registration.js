@@ -29,7 +29,7 @@ export default class Registration extends Component {
 
     render() {
         return (
-            <div className="registration">
+            <div className="registration userform">
                 Register
                 <form onSubmit={this.handleSubmit}>
                     <input 
