@@ -42,7 +42,7 @@ export default function LandingPage() {
   return (
       <Grid 
     container
-      flexGrow={1}
+      flexgrow={1}
       spacing={3}
       direction="row"
       justify="center"
