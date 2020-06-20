@@ -53,7 +53,7 @@ class Searchbar extends Component {
   
   handleSubmit = (event) => {
     this.props.submitSearch(this.state.value);
-    unsplash.search.photos(this.state.value, 1, 10, { orientation: 'portrait' })
+    unsplash.search.photos(this.state.value, 1, 10, { orientation: 'landscape' })
       .then(toJson)
       .then(json => {
         let extractUrls = function ({ urls }) { return { urls }; };
@@ -68,7 +68,7 @@ class Searchbar extends Component {
   handleChange = (event) => {
     this.setState({
       value: event.target.value
-    })
+    });
   }
   
   render() {
