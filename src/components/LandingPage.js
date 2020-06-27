@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -44,13 +44,16 @@ const images = [
   },
 ];
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 400,
     margin: 'auto'
   },
   title: {
-    fontSize: 14,
+    fontSize: 30,
+    textAlign: 'center',
+    padding: 15,
+    color: 'gray'
   },
   grid: {
     display: 'flex',
@@ -61,18 +64,13 @@ const styles = theme => ({
   // pos: {
   //   marginBottom: 12,
   // },
-});
+}));
 
-class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-  render() {
-    const classes = this.props;
+export default function LandingPage() {
+  const classes = useStyles();
     return (
+      <div>
+        <h1 className={classes.title}>Where will your next journey take you?</h1>
       <Grid
         container
         flexgrow={1}
@@ -81,39 +79,23 @@ class LandingPage extends Component {
         justify="center"
         alignContent="center"
       >
-        {images.map((x) => {
-          console.log(x.location)
+        {images.map((image) => {
+          console.log(image.location)
           return <Grid item xs={4}>
             <Card className={classes.root}>
               <CardMedia
                 component="img"
                 height="240"
-                image={x.imgSrc}
-                title={x.location}
+                image={image.imgSrc}
+                title={image.location}
               />
-              <CardContent>
-              </CardContent>
               <CardActions>
-                <Button size="small">{x.location}</Button>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
+                <Button size="small">{image.location}</Button>
               </CardActions>
             </Card>
           </Grid>
         })}
       </Grid>
+      </div>
     );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    query: state.submittedSearch.currentSearch,
-    results: state.submittedImages.savedImages
   };
-};
-
-const LandingPageContainer = connect(mapStateToProps)(withStyles(styles)(LandingPage));
-
-export default LandingPageContainer;
