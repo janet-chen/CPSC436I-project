@@ -19,17 +19,17 @@ const unsplash = new Unsplash(
 
 const styles = theme => ({
   root: {
-    padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
     width: 400,
+    marginLeft: 20
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
   },
   iconButton: {
-    padding: 12,
+    padding: 8,
   },
 });
 

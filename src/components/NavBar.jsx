@@ -12,6 +12,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import travelr from '../travelr.svg';
+import Searchbar from './Searchbar.js';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
+  },
+  searchBar: {
+    margin: 'auto'
   },
   navBar: {
     backgroundColor: 'white'
@@ -79,6 +83,7 @@ export default function PrimarySearchAppBar() {
           <Link to="/" className={classes.logo}>
             <img src={travelr} />
           </Link>
+          <Searchbar className={classes.searchBar}/>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link to="/calendar" className={classes.navButton}>
