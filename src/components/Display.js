@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import CPopper from './Calendar/CPopper';
+import CreateIcon from '@material-ui/icons/Create';
 
 const styles = makeStyles => ({
   root: {
@@ -60,12 +61,13 @@ class Display extends Component {
                 image={imgInState.urls.small}
                 title={this.props.query}
               />
-              <CardContent>
-              </CardContent>
               <CardActions>
                 <Button size="small">{this.props.query}</Button>
                 <IconButton aria-label="add to favorites">
                   <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="write a note">
+                  <CreateIcon />
                 </IconButton>
               </CardActions>
             </Card>
