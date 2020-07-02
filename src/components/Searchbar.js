@@ -25,13 +25,6 @@ const styles = theme => ({
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMedia: (destination) => {
-        dispatch(fetchMedia(destination));
-      }
-  };
-};
 
 class Searchbar extends Component {    
 
@@ -41,8 +34,6 @@ class Searchbar extends Component {
       value: '', 
       toResults: false
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
   
   handleSubmit = (event) => {
@@ -88,5 +79,12 @@ class Searchbar extends Component {
   
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMedia: (destination) => {
+        dispatch(fetchMedia(destination));
+      }
+  };
+};
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(Searchbar));

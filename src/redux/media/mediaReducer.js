@@ -2,12 +2,14 @@ import {
     FETCH_MEDIA_REQUEST,
     FETCH_MEDIA_SUCCESS,
     FETCH_MEDIA_FAILURE,
-    SET_DESTINATION
+    SAVE_MEDIA_REQUEST,
+    SAVE_MEDIA_SUCCESS,
+    SAVE_MEDIA_FAILURE
 } from './mediaTypes.js';
 
 const initialState = {
     loading: false,
-    media: [],
+    results: [],
     error: ''
 }
 
@@ -22,31 +24,57 @@ const mediaState = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                media: action.payload,
+                ...action.payload,
                 error: ''
             }
         case FETCH_MEDIA_FAILURE:
             return {
                 ...state,
                 loading: false,
-                media: [],
+                results: [],
                 error: action.payload
             }
         default: return state
     }
 }
 
-const queryState = (state = {destination: ''}, action) => {
-    if (action.type === SET_DESTINATION) {
-        console.log("setting new destination: " + action.destination)
-        return {
-            destination: action.destination
-        }
-    }
-    return state;
+
+const initialSave = {
+    loading: false,
+    results: {},
+    error: ''
 }
+
+const saveMediaState = (state = initialSave, action) => {
+    switch (action.type) {
+        case SAVE_MEDIA_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case SAVE_MEDIA_SUCCESS:
+            state.results[action.payload.id] = action.payload;
+            return {
+                ...state,
+                loading: false,
+                results: {
+                    ...state.results, 
+                },
+                error: ''
+            }
+        case SAVE_MEDIA_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                results: {},
+                error: action.payload
+            }
+        default: return state
+    }
+}
+
 
 export const mediaReducer = {
     media: mediaState,
-    query: queryState,
+    saved: saveMediaState
 }

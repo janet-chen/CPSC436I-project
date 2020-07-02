@@ -2,15 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import IconButton from '@material-ui/core/IconButton';
-// import CPopper from './Calendar/CPopper';
+import Media from './Media'
 
 const styles = makeStyles => ({
   root: {
@@ -32,16 +24,10 @@ const styles = makeStyles => ({
   // },
 });
 
-function Display({query, media}) {
-  // useEffect(() => {
-  //   console.log("fetching media: " + query)
-  //   if (query !== '')
-  //     fetchMedia(query);
-  // }, []);
+function Display({ query, media, saved }) {
+  // console.log(media)
 
-  // const { classes } = this.props;
-
-  return media.media.length === 0 ? null : (
+  return media.length === 0 ? null : (
     <Grid
       container
       flexgrow={1}
@@ -50,25 +36,9 @@ function Display({query, media}) {
       justify="center"
       alignContent="center"
     >
-      {media.media.map((imgInState, id) => {
-        return <Grid item xs={4}>
-          {/* <Card className={classes.root} key={id}> */}
-          <Card key={id}>
-            <CardMedia
-              component="img"
-              height="240"
-              image={imgInState.urls.small}
-              title={query}
-            />
-            <CardContent>
-            </CardContent>
-            <CardActions>
-              <Button size="small">{query}</Button>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-            </CardActions>
-          </Card>
+      {media.map((imgInState) => {
+        return <Grid item xs={4} key={imgInState.id}>
+          <Media media={imgInState} query={query} saved={imgInState.id in saved}/>
         </Grid>
       })}
     </Grid>
@@ -76,9 +46,13 @@ function Display({query, media}) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    query: state.query.destination,
-    media: state.media
+    query: state.media.query,
+    media: state.media.results,
+    saved: {
+      ...state.saved.results
+  }
   };
 };
 
