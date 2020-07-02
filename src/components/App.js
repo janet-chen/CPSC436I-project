@@ -5,7 +5,7 @@ import Registration from './UserForms/Registration';
 import MainCalendar from './Calendar/MainCalendar';
 import CPopper from './Calendar/CPopper';
 import Searchbar from './Searchbar';
-import SaveColumn from './SaveColumn/SaveColumn';
+// import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';

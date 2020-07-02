@@ -5,17 +5,10 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { useHistory } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { setSearch, saveResults, clearResults } from '../actions/index';
-import Unsplash, { toJson } from 'unsplash-js';
-const APP_ACCESS_KEY = 'adYDaJCisGClWz_PnSuJJiuzl1hItt3kKGxKLePeYPA';
-const SECRET_KEY = 'KFaS1rVbg4l9G1OJ1TSVCL2mYnDMl9c-5wi8puO2Bjo';
-const unsplash = new Unsplash(
-  {
-    accessKey: APP_ACCESS_KEY,
-    secret: SECRET_KEY
-  });
+import { fetchMedia } from '../redux/'
 
 const styles = theme => ({
   root: {
@@ -35,15 +28,9 @@ const styles = theme => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitSearch: (destination) => {
-      dispatch(setSearch(destination));
-    },
-    submitResults: (imageUrls) => {
-      dispatch(saveResults(imageUrls));
-    },
-    clearPrevResults: () => {
-      dispatch(clearResults());
-    }
+    fetchMedia: (destination) => {
+        dispatch(fetchMedia(destination));
+      }
   };
 };
 
@@ -51,24 +38,22 @@ class Searchbar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      value: '', 
+      toResults: false
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   
   handleSubmit = (event) => {
-    this.props.clearPrevResults();
-    this.props.submitSearch(this.state.value);
-    unsplash.search.photos(this.state.value, 1, 12, { orientation: 'landscape' })
-      .then(toJson)
-      .then(json => {
-        let extractUrls = function ({ urls }) { return { urls }; };
-        const imageSubset = json.results.slice(0, 12);
-        const urls = imageSubset.map(imgObject => extractUrls(imgObject));
-        this.props.submitResults(urls);
-      });
+    // this.props.submitSearch(this.state.value)
+    this.props.fetchMedia(this.state.value);
     event.preventDefault();
-    this.props.history.push("/results");
+    
     this.setState({
-      value: ''
+      value: '',
+      toResults: true,
     })
   }
   
@@ -79,6 +64,11 @@ class Searchbar extends Component {
   }
   
   render() {
+    if (this.state.toResults === true) {
+      this.state.toResults = false;
+      return <Redirect to="/results" />
+    }
+
     const { classes } = this.props;
     return (
     <Paper component="form" className={classes.root} onSubmit={this.handleSubmit}>
@@ -93,6 +83,7 @@ class Searchbar extends Component {
         <SearchIcon />
       </IconButton>
     </Paper>
+
     )
   
   }
