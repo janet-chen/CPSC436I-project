@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { useHistory } from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -47,7 +46,6 @@ class Searchbar extends Component {
   }
   
   handleSubmit = (event) => {
-    // this.props.submitSearch(this.state.value)
     this.props.fetchMedia(this.state.value);
     event.preventDefault();
     
@@ -65,7 +63,9 @@ class Searchbar extends Component {
   
   render() {
     if (this.state.toResults === true) {
-      this.state.toResults = false;
+      this.setState({
+        toResults: false
+      });
       return <Redirect to="/results" />
     }
 
