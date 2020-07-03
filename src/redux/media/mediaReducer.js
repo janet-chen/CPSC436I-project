@@ -4,7 +4,9 @@ import {
     FETCH_MEDIA_FAILURE,
     SAVE_MEDIA_REQUEST,
     SAVE_MEDIA_SUCCESS,
-    SAVE_MEDIA_FAILURE
+    SAVE_MEDIA_FAILURE,
+    UNSAVE_MEDIA_SUCCESS,
+    UNSAVE_MEDIA_FAILURE,
 } from './mediaTypes.js';
 
 const initialState = {
@@ -58,7 +60,7 @@ const saveMediaState = (state = initialSave, action) => {
                 ...state,
                 loading: false,
                 results: {
-                    ...state.results, 
+                    ...state.results,
                 },
                 error: ''
             }
@@ -66,7 +68,22 @@ const saveMediaState = (state = initialSave, action) => {
             return {
                 ...state,
                 loading: false,
-                results: {},
+                error: action.payload
+            }
+        case UNSAVE_MEDIA_SUCCESS:
+            delete state.results[action.payload.id];
+            return {
+                ...state,
+                loading: false,
+                results: {
+                    ...state.results,
+                },
+                error: ''
+            }
+        case UNSAVE_MEDIA_FAILURE:
+            return {
+                ...state,
+                loading: false,
                 error: action.payload
             }
         default: return state

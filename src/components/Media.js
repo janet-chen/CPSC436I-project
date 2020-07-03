@@ -8,12 +8,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 
 import { connect } from 'react-redux';
-import { saveMedia } from '../redux/'
+import { toggleSaveMedia } from '../redux/'
 
 
-function Media({query, media, saved, saveMedia}) {
-    const handleSave = () => {
-        saveMedia(media);
+function Media({query, media, saved, toggleSaveMedia}) {
+    const toggleSave = () => {
+        toggleSaveMedia(media, !saved);
     }
 
     return (
@@ -28,8 +28,8 @@ function Media({query, media, saved, saveMedia}) {
             </CardContent>
             <CardActions>
                 <Button size="small" >{query}</Button>
-                <IconButton aria-label="add to favorites" onClick={handleSave}>
-                    <FavoriteIcon color={saved ? "action": "disabled"} />
+                <IconButton aria-label="add to favorites" onClick={toggleSave}>
+                    <FavoriteIcon color={saved ? "secondary": "disabled"} />
                     
                 </IconButton>
             </CardActions>
@@ -39,8 +39,8 @@ function Media({query, media, saved, saveMedia}) {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveMedia: (destination) => {
-            dispatch(saveMedia(destination));
+        toggleSaveMedia: (destination, shouldSave) => {
+            dispatch(toggleSaveMedia(destination, shouldSave));
         },
     };
 };

@@ -4,7 +4,9 @@ import {
     FETCH_MEDIA_FAILURE,
     SAVE_MEDIA_REQUEST,
     SAVE_MEDIA_SUCCESS,
-    SAVE_MEDIA_FAILURE
+    SAVE_MEDIA_FAILURE,
+    UNSAVE_MEDIA_SUCCESS,
+    UNSAVE_MEDIA_FAILURE,
 } from './mediaTypes.js';
 
 import Unsplash, { toJson } from 'unsplash-js';
@@ -44,9 +46,6 @@ export const fetchMedia = destination => {
         unsplash.search.photos(destination, 1, 12, { orientation: 'landscape' })
             .then(toJson)
             .then(json => {
-                // let extractUrls = function ({ urls }) { return { urls }; };
-                // const imageSubset = json.results.slice(0, 12);
-                // const urls = imageSubset.map(imgObject => extractUrls(imgObject));
                 dispatch(fetchMediaSuccess({...json, query: destination}));
             })
             .catch(error => {
@@ -74,10 +73,29 @@ const saveMediaFailure = error => {
     }
 }
 
-export const saveMedia = media => {
+const unsaveMediaSuccess = content => {
+    return {
+        type: UNSAVE_MEDIA_SUCCESS,
+        payload: content
+    }
+}
+
+const unsaveMediaFailure = error => {
+    return {
+        type: UNSAVE_MEDIA_FAILURE,
+        payload: error
+    }
+}
+
+export const toggleSaveMedia = (media, shouldSave) => {
     return (dispatch) => {
         dispatch(saveMediaRequest);
-        /* save id to mongoDB */
-        dispatch(saveMediaSuccess(media));
+        if (shouldSave) {
+            /* save id to mongoDB */
+            dispatch(saveMediaSuccess(media));
+        } else {
+            /* unsave id to mongoDB */
+            dispatch(unsaveMediaSuccess(media));
+        }
     }
 }

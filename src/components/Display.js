@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Media from './Media'
@@ -25,9 +26,8 @@ const styles = makeStyles => ({
 });
 
 function Display({ query, media, saved }) {
-  // console.log(media)
-
-  return media.length === 0 ? null : (
+  console.log(media.length)
+  return (
     <Grid
       container
       flexgrow={1}
@@ -36,9 +36,11 @@ function Display({ query, media, saved }) {
       justify="center"
       alignContent="center"
     >
-      {media.map((imgInState) => {
+      {media.length === 0 ? (
+        null
+      ) : media.map((imgInState) => {
         return <Grid item xs={4} key={imgInState.id}>
-          <Media media={imgInState} query={query} saved={imgInState.id in saved}/>
+          <Media media={imgInState} query={query} saved={imgInState.id in saved} />
         </Grid>
       })}
     </Grid>
@@ -52,7 +54,7 @@ const mapStateToProps = (state) => {
     media: state.media.results,
     saved: {
       ...state.saved.results
-  }
+    }
   };
 };
 
