@@ -79,6 +79,7 @@ class Searchbar extends Component {
   
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchMedia: (destination) => {

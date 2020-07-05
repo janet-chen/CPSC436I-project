@@ -13,7 +13,7 @@ import { toggleSaveMedia } from '../redux/'
 
 function Media({query, media, saved, toggleSaveMedia}) {
     const toggleSave = () => {
-        toggleSaveMedia(media, !saved);
+        toggleSaveMedia("default", media, !saved);
     }
 
     return (
@@ -22,12 +22,12 @@ function Media({query, media, saved, toggleSaveMedia}) {
                 component="img"
                 height="240"
                 image={media.urls.small}
-                title={query}
+                title={media.description}
             />
             <CardContent>
             </CardContent>
             <CardActions>
-                <Button size="small" >{query}</Button>
+                <Button size="small" >{media.tags.find(tag => tag.type === "search").title}</Button>
                 <IconButton aria-label="add to favorites" onClick={toggleSave}>
                     <FavoriteIcon color={saved ? "secondary": "disabled"} />
                     
@@ -39,8 +39,8 @@ function Media({query, media, saved, toggleSaveMedia}) {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        toggleSaveMedia: (destination, shouldSave) => {
-            dispatch(toggleSaveMedia(destination, shouldSave));
+        toggleSaveMedia: (folder, destination, shouldSave) => {
+            dispatch(toggleSaveMedia(folder, destination, shouldSave));
         },
     };
 };

@@ -3,12 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-// import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import travelr from '../travelr.svg';
@@ -81,6 +78,9 @@ export default function PrimarySearchAppBar() {
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Link to="/saved" className={classes.navButton}>
+              <Button variant="outlined" >Saved</Button>
+            </Link>
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
             </Link>

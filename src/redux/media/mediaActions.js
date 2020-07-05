@@ -59,9 +59,10 @@ const saveMediaRequest = () => {
         type: SAVE_MEDIA_REQUEST
     }
 }
-const saveMediaSuccess = content => {
+const saveMediaSuccess = (folder, content) => {
     return {
         type: SAVE_MEDIA_SUCCESS,
+        folder: folder,
         payload: content
     }
 }
@@ -73,9 +74,10 @@ const saveMediaFailure = error => {
     }
 }
 
-const unsaveMediaSuccess = content => {
+const unsaveMediaSuccess = (folder, content) => {
     return {
         type: UNSAVE_MEDIA_SUCCESS,
+        folder: folder,
         payload: content
     }
 }
@@ -87,15 +89,15 @@ const unsaveMediaFailure = error => {
     }
 }
 
-export const toggleSaveMedia = (media, shouldSave) => {
+export const toggleSaveMedia = (folder, media, shouldSave) => {
     return (dispatch) => {
         dispatch(saveMediaRequest);
         if (shouldSave) {
             /* save id to mongoDB */
-            dispatch(saveMediaSuccess(media));
+            dispatch(saveMediaSuccess(folder, media));
         } else {
             /* unsave id to mongoDB */
-            dispatch(unsaveMediaSuccess(media));
+            dispatch(unsaveMediaSuccess(folder, media));
         }
     }
 }

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Media from './Media'
@@ -25,8 +24,7 @@ const styles = makeStyles => ({
   // },
 });
 
-function Display({ query, media, saved }) {
-  console.log(media.length)
+function Display({ query, media, folders }) {
   return (
     <Grid
       container
@@ -40,7 +38,12 @@ function Display({ query, media, saved }) {
         null
       ) : media.map((imgInState) => {
         return <Grid item xs={4} key={imgInState.id}>
-          <Media media={imgInState} query={query} saved={imgInState.id in saved} />
+          <Media 
+            media={imgInState} 
+            query={query} 
+            saved={folders
+              .find(folder => folder.images.find(img => img.id === imgInState.id) !== undefined) !== undefined} 
+          />
         </Grid>
       })}
     </Grid>
@@ -52,9 +55,7 @@ const mapStateToProps = (state) => {
   return {
     query: state.media.query,
     media: state.media.results,
-    saved: {
-      ...state.saved.results
-    }
+    folders: state.folders.folders
   };
 };
 
