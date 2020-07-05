@@ -24,7 +24,6 @@ function App() {
         <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
         <Route path="/saved" component={SavedDisplay} />
-        <Route path="/saved/:folder" />
         <Route path="/calendar" component={MainCalendar} />
       </Switch>
       <CPopper />
