@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './UserForms.css'
+// import './UserForms.css'
 
 export default class Registration extends Component {
     constructor(props) {

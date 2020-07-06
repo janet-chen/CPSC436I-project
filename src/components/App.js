@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from './UserForms/Login';
-import Registration from './UserForms/Registration';
+import RegistrationMUI from './UserForms/Registration-MUI';
 import MainCalendar from './Calendar/MainCalendar';
 import CPopper from './Calendar/CPopper';
 import Searchbar from './Searchbar';
@@ -16,11 +16,11 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <Route path="/" component={Searchbar} />
       <Switch>
+        <Route path="/" component={Searchbar} exact/>
         <Route path="/" component={LandingPage} exact/>
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Registration} />
+        <Route path="/register" component={RegistrationMUI} />
         <Route path="/results" component={Display} />
         <Route path="/calendar" component={MainCalendar} />
       </Switch>
