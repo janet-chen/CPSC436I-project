@@ -5,11 +5,12 @@ import Registration from './UserForms/Registration';
 import MainCalendar from './Calendar/MainCalendar';
 import CPopper from './Calendar/CPopper';
 import Searchbar from './Searchbar';
-import SaveColumn from './SaveColumn/SaveColumn';
+// import SaveColumn from './SaveColumn/SaveColumn';
 import Display from './Display';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import SavedDisplay from './SavedDisplay';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
+        <Route path="/saved" component={SavedDisplay} />
         <Route path="/calendar" component={MainCalendar} />
       </Switch>
       <CPopper />
