@@ -17,11 +17,11 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <Route path="/" component={Searchbar} />
+      {/* <Route path="/" component={Searchbar} /> */}
       <Switch>
         <Route path="/" component={LandingPage} exact/>
-        {/* <Route path="/login" component={Login} /> */}
-        {/* <Route path="/register" component={Registration} /> */}
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
         <Route path="/saved" component={SavedDisplay} />
         <Route path="/calendar" component={MainCalendar} />

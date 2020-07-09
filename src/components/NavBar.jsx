@@ -9,6 +9,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import travelr from '../travelr.svg';
+import Searchbar from './Searchbar';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   navButton: {
     "margin-right": 20,
     "margin-top": "5px"
+  },
+  searchbar: {
+    "margin-left": 50
   },
   logo: {
     display: 'none',
@@ -76,6 +80,7 @@ export default function PrimarySearchAppBar() {
           <Link to="/" className={classes.logo}>
             <img src={travelr} />
           </Link>
+          <Searchbar />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link to="/saved" className={classes.navButton}>
