@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -6,9 +6,16 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import { fetchFavourites } from '../redux/'
 
 
-function SavedDisplay({ folders }) {
+
+function SavedDisplay({ folders, fetchFavourites }) {
+    
+    useEffect(() => {
+        fetchFavourites();
+    });
+    
     return (
         <Grid
             container
@@ -49,4 +56,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(SavedDisplay);;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFavourites: () => {
+            dispatch(fetchFavourites());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SavedDisplay);;
