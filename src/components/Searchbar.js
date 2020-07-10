@@ -11,7 +11,7 @@ import { fetchMedia } from '../redux/'
 
 const styles = theme => ({
   root: {
-    padding: '2px 4px',
+    padding: '2px 2px',
     display: 'flex',
     alignItems: 'center',
     width: 400,
@@ -21,7 +21,7 @@ const styles = theme => ({
     flex: 1,
   },
   iconButton: {
-    padding: 12,
+    padding: 8,
   },
 });
 
