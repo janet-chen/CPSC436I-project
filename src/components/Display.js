@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
-import React from 'react';
+import React, { useEffect, } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Media from './Media'
+import { fetchFavourites } from '../redux';
 
 const styles = makeStyles => ({
   root: {
@@ -24,7 +25,12 @@ const styles = makeStyles => ({
   // },
 });
 
-function Display({ query, media, folders }) {
+function Display({ query, media, folders, fetchFavourites }) {
+
+  useEffect(() => {
+    fetchFavourites();
+  });
+
   return (
     <Grid
       container
@@ -59,6 +65,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-const DisplayContainer = connect(mapStateToProps)(withStyles(styles)(Display));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchFavourites: () => {
+      dispatch(fetchFavourites());
+    }
+  }
+}
+
+const DisplayContainer = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Display));
 
 export default DisplayContainer;

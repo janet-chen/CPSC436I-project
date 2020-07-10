@@ -2,6 +2,9 @@ import {
     FETCH_MEDIA_REQUEST,
     FETCH_MEDIA_SUCCESS,
     FETCH_MEDIA_FAILURE,
+    FETCH_FAVOURITES_REQUEST,
+    FETCH_FAVOURITES_SUCCESS,
+    FETCH_FAVOURITES_FAILURE,
     SAVE_MEDIA_REQUEST,
     SAVE_MEDIA_SUCCESS,
     SAVE_MEDIA_FAILURE,
@@ -40,55 +43,6 @@ const mediaState = (state = initialState, action) => {
     }
 }
 
-// const initialSave = {
-//     loading: false,
-//     results: {},
-//     error: ''
-// }
-
-// const saveMediaState = (state = initialSave, action) => {
-//     switch (action.type) {
-//         case SAVE_MEDIA_REQUEST:
-//             return {
-//                 ...state,
-//                 loading: true
-//             }
-//         case SAVE_MEDIA_SUCCESS:
-//             state.results[action.payload.id] = action.payload;
-//             return {
-//                 ...state,
-//                 loading: false,
-//                 results: {
-//                     ...state.results,
-//                 },
-//                 error: ''
-//             }
-//         case SAVE_MEDIA_FAILURE:
-//             return {
-//                 ...state,
-//                 loading: false,
-//                 error: action.payload
-//             }
-//         case UNSAVE_MEDIA_SUCCESS:
-//             delete state.results[action.payload.id];
-//             return {
-//                 ...state,
-//                 loading: false,
-//                 results: {
-//                     ...state.results,
-//                 },
-//                 error: ''
-//             }
-//         case UNSAVE_MEDIA_FAILURE:
-//             return {
-//                 ...state,
-//                 loading: false,
-//                 error: action.payload
-//             }
-//         default: return state
-//     }
-// }
-
 const initialFolders = {
     loading: false,
     folders: [],
@@ -97,6 +51,28 @@ const initialFolders = {
 
 const foldersReducer = (state = initialFolders, action) => {
     switch (action.type) {
+        case FETCH_FAVOURITES_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case FETCH_FAVOURITES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                folders: [
+                    {
+                        name: "default",
+                        images: action.payload
+                    }
+                ]
+            }
+        case FETCH_FAVOURITES_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                folders: []
+            }
         case SAVE_MEDIA_REQUEST:
             return {
                 ...state,
@@ -158,5 +134,4 @@ const foldersReducer = (state = initialFolders, action) => {
 
 export const mediaReducer = {
     media: mediaState,
-    folders: foldersReducer
-}
+    folders: foldersReducer}
