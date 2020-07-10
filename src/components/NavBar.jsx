@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
@@ -64,12 +65,14 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="/login">
-        <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+      <Typography className={classes.root}>
+      <Link to="/login"> 
+        <MenuItem onClick={handleMenuClose} color="inherit">Login</MenuItem>
       </Link>
-      <Link to="/register">
+      <Link to="/register" color="inherit">
         <MenuItem onClick={handleMenuClose}>Register</MenuItem>
       </Link>
+      </Typography>
     </Menu>
   );
 
