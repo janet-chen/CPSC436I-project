@@ -14,7 +14,7 @@ function SavedDisplay({ folders, fetchFavourites }) {
     
     useEffect(() => {
         fetchFavourites();
-    });
+    }, []);
     
     return (
         <Grid

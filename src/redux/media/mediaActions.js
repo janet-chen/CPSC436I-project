@@ -116,18 +116,17 @@ export const toggleSaveMedia = (folder, media, shouldSave) => {
                 });
         } else {
             /* unsave id to mongoDB */
-            // fetch(TRAVELR_API,
-            //     {
-            //         method: "DELETE",
-                    
-            //     }
-            // )
-            //     .then(res => {
-            //         dispatch(unsaveMediaSuccess(folder, media));
-            //     })
-            //     .catch(error => {
-            //         dispatch(unsaveMediaFailure(error));
-            //     });
+            fetch(TRAVELR_API + "/" + media.id,
+                {
+                    method: "DELETE",
+                }
+            )
+                .then(res => {
+                    dispatch(unsaveMediaSuccess(folder, media));
+                })
+                .catch(error => {
+                    dispatch(unsaveMediaFailure(error));
+                });
             dispatch(unsaveMediaSuccess(folder, media));
         }
     }

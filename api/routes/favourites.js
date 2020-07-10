@@ -55,10 +55,10 @@ router.delete('/:id', function(req, res, next) {
         }
         console.log('Connected...');
         const collection = client.db("travelr").collection("favourites");
-        collection.deleteOne({id: id});
+        collection.deleteOne({id: req.params.id});
         client.close();
     });
-    res.send(id);
+    res.send(req.params.id);
 })
 
 module.exports = router;

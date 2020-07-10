@@ -29,7 +29,7 @@ function Display({ query, media, folders, fetchFavourites }) {
 
   useEffect(() => {
     fetchFavourites();
-  });
+  }, []);
 
   return (
     <Grid
