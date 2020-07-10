@@ -2,6 +2,9 @@ import {
     FETCH_MEDIA_REQUEST,
     FETCH_MEDIA_SUCCESS,
     FETCH_MEDIA_FAILURE,
+    FETCH_FAVOURITES_REQUEST,
+    FETCH_FAVOURITES_SUCCESS,
+    FETCH_FAVOURITES_FAILURE,
     SAVE_MEDIA_REQUEST,
     SAVE_MEDIA_SUCCESS,
     SAVE_MEDIA_FAILURE,
@@ -18,6 +21,7 @@ const unsplash = new Unsplash(
     secret: SECRET_KEY
   }
 );
+const TRAVELR_API = 'http://localhost:9000/favourites';
 
 
 const fetchMediaRequest = () => {
@@ -94,10 +98,75 @@ export const toggleSaveMedia = (folder, media, shouldSave) => {
         dispatch(saveMediaRequest);
         if (shouldSave) {
             /* save id to mongoDB */
-            dispatch(saveMediaSuccess(folder, media));
+            console.log(JSON.stringify(media));
+            fetch(TRAVELR_API,
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(media)
+                }
+            )
+                .then(res => {
+                    dispatch(saveMediaSuccess(folder, media));
+                })
+                .catch(error => {
+                    dispatch(saveMediaFailure(error));
+                });
         } else {
             /* unsave id to mongoDB */
+            // fetch(TRAVELR_API,
+            //     {
+            //         method: "DELETE",
+                    
+            //     }
+            // )
+            //     .then(res => {
+            //         dispatch(unsaveMediaSuccess(folder, media));
+            //     })
+            //     .catch(error => {
+            //         dispatch(unsaveMediaFailure(error));
+            //     });
             dispatch(unsaveMediaSuccess(folder, media));
         }
+    }
+}
+
+const fetchFavouritesRequest = () => {
+    return {
+        type: FETCH_FAVOURITES_REQUEST
+    }
+}
+
+const fetchFavouritesSuccess = (favourites) => {
+    return {
+        type: FETCH_FAVOURITES_SUCCESS,
+        payload: favourites
+    }
+}
+
+const fetchFavouritesFailure = (error) => {
+    return {
+        type: FETCH_FAVOURITES_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchFavourites = () => {
+    return (dispatch) => {
+        dispatch(fetchFavouritesRequest);
+        fetch(TRAVELR_API,
+            { 
+                method: 'GET',
+            }
+        )
+            .then(toJson)
+            .then(json => {
+                dispatch(fetchFavouritesSuccess(json));
+            })
+            .catch(error => {
+                dispatch(fetchFavouritesFailure(error.message));
+            });
     }
 }
