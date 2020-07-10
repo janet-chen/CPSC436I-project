@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import { fetchFavourites } from '../redux/'
+import Media from './Media'
 
 
 
@@ -18,33 +19,24 @@ function SavedDisplay({ folders, fetchFavourites }) {
     
     return (
         <Grid
-            container
-            flexgrow={1}
-            spacing={3}
-            direction="row"
-            justify="center"
-            alignContent="center"
+          container
+          flexgrow={1}
+          spacing={3}
+          direction="row"
+          justify="center"
+          alignContent="center"
         >
-            {folders.folders.map((folder) => {
-                const image = folder.images[0]; // use first image in folder as representative for folder
-                return (
-                    <Grid item xs={4}>
-                        <Card >
-                            <CardMedia
-                                component="img"
-                                height="240"
-                                image={image.urls.small}
-                                title={image.description}
-                            />
-                            <CardActions>
-                                <Link to={`/folder/${folder.name}`} style={{ textDecoration: 'none' }} >
-                                    <Button size="small" >{folder.name}</Button>
-                                </Link>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                )
-            })}
+          {folders.folders.length === 0 ? (
+            null
+          ) : folders.folders[0].images.map((imgInState) => {
+            return <Grid item xs={4} key={imgInState.id}>
+              <Media 
+                media={imgInState} 
+                saved={folders.folders
+                  .find(folder => folder.images.find(img => img.id === imgInState.id) !== undefined) !== undefined} 
+              />
+            </Grid>
+          })}
         </Grid>
     )
 }
