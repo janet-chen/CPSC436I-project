@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* DELETE a favourite */
-router.post('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     MongoClient.connect(uri, function (err, client) {
         if (err) {
             console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
