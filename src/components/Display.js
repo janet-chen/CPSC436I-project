@@ -51,7 +51,7 @@ function Display({ query, media, folders, fetchFavourites, videos }) {
 
   useEffect(() => {
     fetchFavourites();
-  });
+  }, []);
 
   return (
     <Grid

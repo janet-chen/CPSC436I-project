@@ -48,4 +48,18 @@ router.post('/', function(req, res, next) {
     res.send(newFavourite);
 });
 
+/* DELETE a favourite */
+router.delete('/:id', function(req, res, next) {
+    MongoClient.connect(uri, function (err, client) {
+        if (err) {
+            console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
+        }
+        console.log('Connected...');
+        const collection = client.db("travelr").collection("favourites");
+        collection.deleteOne({id: req.params.id});
+        client.close();
+    });
+    res.send(req.params.id);
+})
+
 module.exports = router;

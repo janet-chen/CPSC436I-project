@@ -22,7 +22,7 @@ const findTitle = (tags) => {
   }
 };
 
-function Media({query, media, saved, toggleSaveMedia}) {
+function Media({media, saved, toggleSaveMedia}) {
     const toggleSave = () => {
         toggleSaveMedia("default", media, !saved);
     }
