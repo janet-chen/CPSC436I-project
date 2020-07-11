@@ -10,6 +10,9 @@ import {
     SAVE_MEDIA_FAILURE,
     UNSAVE_MEDIA_SUCCESS,
     UNSAVE_MEDIA_FAILURE,
+    FETCH_VIDEOS_REQUEST,
+    FETCH_VIDEOS_SUCCESS,
+    FETCH_VIDEOS_FAILURE
 } from './mediaTypes.js';
 
 import Unsplash, { toJson } from 'unsplash-js';
@@ -21,7 +24,9 @@ const unsplash = new Unsplash(
     secret: SECRET_KEY
   }
 );
-const TRAVELR_API = 'http://localhost:9000/favourites';
+const TRAVELR_API = 'http://localhost:9000';
+const FAVOURITES_URL = `${TRAVELR_API}/favourites`;
+const VIDEOS_URL = `${TRAVELR_API}/findVideos`;
 
 
 const fetchMediaRequest = () => {
@@ -99,7 +104,7 @@ export const toggleSaveMedia = (folder, media, shouldSave) => {
         if (shouldSave) {
             /* save id to mongoDB */
             console.log(JSON.stringify(media));
-            fetch(TRAVELR_API,
+            fetch(FAVOURITES_URL,
                 {
                     method: "POST",
                     headers: {
@@ -155,7 +160,7 @@ const fetchFavouritesFailure = (error) => {
 export const fetchFavourites = () => {
     return (dispatch) => {
         dispatch(fetchFavouritesRequest);
-        fetch(TRAVELR_API,
+        fetch(FAVOURITES_URL,
             { 
                 method: 'GET',
             }
@@ -167,5 +172,48 @@ export const fetchFavourites = () => {
             .catch(error => {
                 dispatch(fetchFavouritesFailure(error.message));
             });
+    }
+}
+
+const fetchVideosRequest = () => {
+    return {
+        type: FETCH_VIDEOS_REQUEST
+    }
+}
+
+const fetchVideosSuccess = content => {
+    return {
+        type: FETCH_VIDEOS_SUCCESS,
+        payload: content
+    }
+}
+
+const fetchVideosFailure = error => {
+    return {
+        type: FETCH_VIDEOS_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchVideos = (query) => {
+    return (dispatch) => {
+        dispatch(fetchVideosRequest());
+        fetch(VIDEOS_URL, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              destination: query
+            })
+          })
+          .then(toJson)
+          .then(json => {
+              dispatch(fetchVideosSuccess(json));
+          })
+          .catch(error => {
+              dispatch(fetchVideosFailure(error.message));
+          })
     }
 }

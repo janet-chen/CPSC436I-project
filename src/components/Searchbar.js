@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import {Redirect} from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { fetchMedia } from '../redux/'
+import { fetchMedia, fetchVideos } from '../redux/'
 
 const styles = theme => ({
   root: {
@@ -38,6 +38,7 @@ class Searchbar extends Component {
   
   handleSubmit = (event) => {
     this.props.fetchMedia(this.state.value);
+    this.props.fetchVideos(this.state.value);
     event.preventDefault();
     
     this.setState({
@@ -84,7 +85,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchMedia: (destination) => {
         dispatch(fetchMedia(destination));
-      }
+      },
+    fetchVideos: (destination) => {
+      dispatch(fetchVideos(destination));
+    }
   };
 };
 

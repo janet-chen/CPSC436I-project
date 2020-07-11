@@ -10,6 +10,17 @@ import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 import { toggleSaveMedia } from '../redux/'
 
+const findTitle = (tags) => {
+  console.log('TAGS: ' + JSON.stringify(tags));
+  let tag = tags.find(tag => tag.type === "search");
+  if (tag) {
+    return tags.find(tag => tag.type === "search");
+  } else {
+    return {
+      title: 'NO TAGS'
+    };
+  }
+};
 
 function Media({media, saved, toggleSaveMedia}) {
     const toggleSave = () => {
@@ -27,7 +38,7 @@ function Media({media, saved, toggleSaveMedia}) {
             <CardContent>
             </CardContent>
             <CardActions>
-                <Button size="small" >{media.tags.find(tag => tag.type === "search").title}</Button>
+                <Button size="small" >{findTitle(media.tags).title}</Button>
                 <IconButton aria-label="add to favorites" onClick={toggleSave}>
                     <FavoriteIcon color={saved ? "secondary": "disabled"} />
                     
