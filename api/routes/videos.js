@@ -10,7 +10,8 @@ async function query (req) {
   const response = await youtube.search.list({
     part: 'id,snippet',
     fields: 'items/id',
-    q: `travel ${req.body.destination}`
+    q: `travel ${req.body.destination}`,
+    maxResults: 6
   });
   return response;
 }
@@ -18,7 +19,6 @@ async function query (req) {
 async function callback (req, res) {
   let response = await query(req);
   let idArray = response.data.items.map(videoObj => videoObj.id.videoId);
-  console.log('~~~~~~~~ ' + JSON.stringify(idArray));
   return res.status(200).json({
     ids: idArray
   });

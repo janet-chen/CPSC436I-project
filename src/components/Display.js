@@ -25,7 +25,29 @@ const styles = makeStyles => ({
   // },
 });
 
-function Display({ query, media, folders, fetchFavourites }) {
+function mergeMediaAndVideos (query, media, folders, videos) {
+  let mediaContent = media.map((imgInState) => {
+    return <Grid item xs={4} key={imgInState.id}>
+      <Media 
+        media={imgInState} 
+        query={query} 
+        saved={folders
+          .find(folder => folder.images.find(img => img.id === imgInState.id) !== undefined) !== undefined}
+      />
+    </Grid>;
+  });
+  let videoContent = videos.map((videoId) => {
+    return <Grid item xs={6} key={videoId}>
+    <iframe id="ytplayer" type="text/html" width="540" height="360"
+         src={`https://www.youtube.com/embed/${videoId}?autoplay=1&origin=http://example.com`}
+         frameBorder="0"></iframe>
+    </Grid>
+  });
+  let allContent = mediaContent.concat(videoContent);
+  return allContent;
+}
+
+function Display({ query, media, folders, fetchFavourites, videos }) {
 
   useEffect(() => {
     fetchFavourites();
@@ -42,18 +64,10 @@ function Display({ query, media, folders, fetchFavourites }) {
     >
       {media.length === 0 ? (
         null
-      ) : media.map((imgInState) => {
-        return <Grid item xs={4} key={imgInState.id}>
-          <Media 
-            media={imgInState} 
-            query={query} 
-            saved={folders
-              .find(folder => folder.images.find(img => img.id === imgInState.id) !== undefined) !== undefined} 
-          />
-        </Grid>
-      })}
+      ) : mergeMediaAndVideos(query, media, folders, videos)
+      }
     </Grid>
-  )
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -61,7 +75,8 @@ const mapStateToProps = (state) => {
   return {
     query: state.media.query,
     media: state.media.results,
-    folders: state.folders.folders
+    folders: state.folders.folders,
+    videos: state.videos.ids
   };
 };
 
