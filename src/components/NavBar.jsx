@@ -66,6 +66,9 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <Typography className={classes.root}>
+      <Link to="/saved" color="inherit">
+        <MenuItem onClick={handleMenuClose}>Favourites</MenuItem>
+      </Link>
       <Link to="/login"> 
         <MenuItem onClick={handleMenuClose} color="inherit">Login</MenuItem>
       </Link>
