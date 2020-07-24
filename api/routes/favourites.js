@@ -14,13 +14,12 @@ router.get('/', function(req, res, next) {
         }
         console.log('Connected...');
         const collection = client.db("travelr").collection("favourites");
-        // collection.find({}).toArray((err, result) => {
-        //     if (err) console.log(err)
-        //     else {
-        //         return res.send(result);
-        //     }
-        // })
-        let response = collection.find({});
+        collection.find({}).toArray((err, result) => {
+            if (err) console.log(err)
+            else {
+                return res.send(result);
+            }
+        })
         // perform actions on the collection object
         client.close();
     });

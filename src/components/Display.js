@@ -71,7 +71,7 @@ function Display({ query, media, folders, fetchFavourites, videos }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     query: state.media.query,
     media: state.media.results,
