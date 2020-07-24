@@ -66,7 +66,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <Typography className={classes.root}>
-      <Link to="/login"> 
+      <Link to="/login">
         <MenuItem onClick={handleMenuClose} color="inherit">Login</MenuItem>
       </Link>
       <Link to="/register" color="inherit">
@@ -91,6 +91,9 @@ export default function PrimarySearchAppBar() {
             </Link>
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
+            </Link>
+            <Link to="/trips" className={classes.navButton}>
+              <Button variant="outlined" >Trips</Button>
             </Link>
             <Link to="/register" className={classes.navButton}>
               <Button variant="outlined" >Sign Up</Button>
