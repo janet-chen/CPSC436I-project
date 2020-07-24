@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import Login from './UserForms/Login';
-import Registration from './UserForms/Registration';
+import Login from './Login';
 import MainCalendar from './Calendar/MainCalendar';
 import CPopper from './Calendar/CPopper';
 import Display from './Display';
@@ -15,11 +14,9 @@ function App() {
   return (
     <Router>
       <NavBar />
-      {/* <Route path="/" component={Searchbar} /> */}
       <Switch>
         <Route path="/" component={LandingPage} exact/>
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Registration} />
         <Route path="/results" component={Display} />
         <Route path="/saved" component={SavedDisplay} />
         <Route path="/calendar" component={MainCalendar} />

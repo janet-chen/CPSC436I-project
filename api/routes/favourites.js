@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 // gets URI from .env 
-var uri = process.env.DB_URI;
+// var uri = process.env.DB_URI;
+var keys = require('../config/keys');
+var uri = keys.DB_URI;
 var MongoClient = require('mongodb').MongoClient;
 
 /* GET favourites listing. */
