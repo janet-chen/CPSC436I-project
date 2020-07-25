@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { GoogleLogin } from 'react-google-login';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogin } from '../redux';
 
 // const clientId = process.env.clientId;
 const gapiId = "99565761776-86oc4v48e5kfk2sng5kj0duo673ao88r.apps.googleusercontent.com";
@@ -29,19 +31,23 @@ var profile = {
 }
 
 
-function Login() {
+function Login({login}) {
   const classes = useStyles();
+  
+  const [toLandingPage, setToLandingPage] = useState(false);
 
   const onSuccess = (res) => {
-    alert('successfully logged in');
+    // alert('successfully logged in');
     console.log('login success currentUser: ', res.profileObj);
     profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,
       imageUrl: res.profileObj.imageUrl
     }
+    
+    login();
     signedIn = true;
-    return <Redirect to='/'/>
+    setToLandingPage(true);
   }
 
   const onFailure = (res) => {
@@ -61,6 +67,11 @@ function Login() {
     }
   }, []);
 
+  if (toLandingPage) {
+    return (
+      <Redirect to="/"/>
+    )
+  }
   return (
     <div className={classes.root}>
       <GoogleLogin
@@ -76,5 +87,14 @@ function Login() {
   );
 }
 
+export { signedIn, profile };
 
-export { signedIn, Login, profile };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: () => {
+      dispatch(userLogin());
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

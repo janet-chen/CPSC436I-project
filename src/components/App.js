@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Login } from './Login';
+import Login from './Login';
+import Logout from './Logout';
 import MainCalendar from './Calendar/MainCalendar';
 import CPopper from './Calendar/CPopper';
 import MyTrips from './Trips/TripsList';
@@ -26,16 +27,7 @@ function App() {
         <Route path="/trips" component={MyTrips} />
         <Route path="/sampleTrip" component={SampleTrip} />
         <Route path="/profile" component={Profile} />
-        <Route path="/logout"
-          component={() => {
-            fetch('http://localhost:9000/auth/logout',
-              { 
-                  method: 'GET',
-              }
-          )
-            return null;
-          }}
-        />
+        <Route path="/logout" component={Logout} />
       </Switch>
     </Router>
 
