@@ -10,11 +10,20 @@ import {
 } from '@material-ui/core';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { connect } from 'react-redux';
+import { deleteTrip } from '../../redux/trips/tripsActions'
 
-export default function TripsListItem(trip) {
+
+
+export default function TripsListItem(trip, index, del) {
+
+  const handleDelete = (title) => {
+    console.log(title);
+    del(title);
+  }
+
   return (
-    <div>
-    <ListItem>
+    <ListItem key={index}>
     <Link to="/sampleTrip">
       <ListItemAvatar>
         <Avatar>
@@ -24,13 +33,24 @@ export default function TripsListItem(trip) {
       </Link>
       <ListItemText
         primary={trip.title}
+        secondary={trip.days + " days"}
       />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
+        <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(trip.title)}>
           <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
-    </div>
   );
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return null;
+//     return {
+//         // deleteTrip: (tripTitle) => {
+//         //   dispatch(deleteTrip(tripTitle));
+//         // }
+//     }
+// };
+//
+// export default connect(null, mapDispatchToProps)(TripsListItem);

@@ -1,6 +1,4 @@
-import { combineReducers } from 'redux';
-
-var tempTrips = [
+var tempTrips = {trips: [
   {
     title: "Greece Honeymoon",
     days: 3
@@ -13,7 +11,7 @@ var tempTrips = [
     title: "Mexico Christmas",
     days: 7
   }
-];
+]};
 
 var tempGreeceTrip = {
   title: "Greece Honeymoon",
@@ -25,9 +23,10 @@ var tempGreeceTrip = {
   ]
 };
 
-const tripsReducers = (trips = tempTrips, action) => {
+const tripsState = (trips = tempTrips, action) => {
   if (action.type === 'ADD_TRIP' && action.title !== "") {
-    return [...trips, {title: action.title, days: action.days}];
+    trips.trips.push({title: action.title, days: action.days});
+    return trips;
   }
   if (action.type === 'DELETE_TRIP') {
     return trips.filter(trip => trip.title !== action.title);
@@ -36,5 +35,5 @@ const tripsReducers = (trips = tempTrips, action) => {
 }
 
 export const tripsReducer = {
-  trips: tripsReducers
+  trips: tripsState
 };

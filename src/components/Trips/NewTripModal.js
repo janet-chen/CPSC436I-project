@@ -7,6 +7,7 @@ import {
   Button
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import NewTripForm from './NewTripForm';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -40,6 +41,7 @@ export default function NewTripModal() {
       <Button
         variant="contained"
         endIcon={<AddIcon/>}
+        onClick={handleOpen}
         >
         New Trip
       </Button>
@@ -57,8 +59,8 @@ export default function NewTripModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+
+            <NewTripForm/>
           </div>
         </Fade>
       </Modal>

@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     ...mediaReducer,
-    tripsReducer
+    ...tripsReducer
 });
 
 export default rootReducer;

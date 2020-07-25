@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const getItems = (count, offset = 0) =>
     Array.from({ length: count }, (v, k) => k).map(k => ({
         id: `item-${k + offset}`,
-        content: `item ${k + offset}`
+        content: `media item ${k + offset}`
     }));
 
 // a little function to help us with reordering the result
@@ -39,20 +39,23 @@ const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
+    borderRadius: '5px',
     userSelect: 'none',
     padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? '#50a2a7' : '#6cbcbc',
 
     // styles we need to apply on draggables
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
+    background: isDraggingOver ? '#a8d4d7' : '#c4dce3',
+    borderRadius: '10px',
+    padding: 15,
+    margin: 5,
     float: 'left',
     width: 250
 });
@@ -117,6 +120,7 @@ export default class TripPageNew extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
+            <br/>
                 <Droppable droppableId="droppable">
                     {(provided, snapshot) => (
                         <div
