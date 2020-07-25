@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navBar: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    "margin-bottom": "2em"
   },
   navButton: {
     "margin-right": 20,
@@ -101,12 +102,8 @@ export default function PrimarySearchAppBar() {
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
             </Link>
-
             <Link to="/trips" className={classes.navButton}>
               <Button variant="outlined" >Trips</Button>
-            </Link>
-            <Link to="/register" className={classes.navButton}>
-              <Button variant="outlined" >Sign Up</Button>
             </Link>
 
             <IconButton
