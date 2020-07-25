@@ -49,6 +49,7 @@ const mediaState = (state = initialState, action) => {
 const initialFolders = {
     loading: false,
     folders: [],
+    filters: [],
     error: ''
 }
 
@@ -60,6 +61,13 @@ const foldersReducer = (state = initialFolders, action) => {
                 loading: true
             }
         case FETCH_FAVOURITES_SUCCESS:
+            let filters = new Set();
+            action.payload.forEach(item => {
+                item.tags.forEach(tag => {
+                    if (tag.type === "search")
+                        filters.add(tag.title);
+                });
+            });
             return {
                 ...state,
                 loading: false,
@@ -68,7 +76,8 @@ const foldersReducer = (state = initialFolders, action) => {
                         name: "default",
                         images: action.payload
                     }
-                ]
+                ],
+                filters: Array.from(filters)
             }
         case FETCH_FAVOURITES_FAILURE:
             return {

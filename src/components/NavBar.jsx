@@ -71,6 +71,9 @@ export default function PrimarySearchAppBar() {
           <Link to="/profile" color="inherit">
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
           </Link>
+          <Link to="/saved" color="inherit">
+            <MenuItem onClick={handleMenuClose}>Favourites</MenuItem>
+          </Link>
           <Link to="/logout" color="inherit">
             <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
           </Link>
