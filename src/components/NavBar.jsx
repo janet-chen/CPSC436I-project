@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import travelr from '../travelr.svg';
 import Searchbar from './Searchbar';
+import { signedIn } from './Login';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -65,17 +66,22 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Typography className={classes.root}>
-      <Link to="/saved" color="inherit">
-        <MenuItem onClick={handleMenuClose}>Favourites</MenuItem>
-      </Link>
-      <Link to="/login"> 
-        <MenuItem onClick={handleMenuClose} color="inherit">Login</MenuItem>
-      </Link>
-      <Link to="/register" color="inherit">
-        <MenuItem onClick={handleMenuClose}>Register</MenuItem>
-      </Link>
-      </Typography>
+        {signedIn ?
+        <div>
+          <Link to="/profile" color="inherit">
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          </Link>
+          <Link to="/saved" color="inherit">
+            <MenuItem onClick={handleMenuClose}>Favourites</MenuItem>
+          </Link>
+          <Link to="/logout" color="inherit">
+            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+          </Link>
+          </div> 
+          : <Link to="/login" color="inherit">
+            <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+          </Link>
+        }
     </Menu>
   );
 
@@ -94,9 +100,6 @@ export default function PrimarySearchAppBar() {
             </Link>
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
-            </Link>
-            <Link to="/register" className={classes.navButton}>
-              <Button variant="outlined" >Sign Up</Button>
             </Link>
             <IconButton
               edge="end"
