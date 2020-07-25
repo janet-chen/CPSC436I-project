@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { toggleSaveMedia } from '../redux/'
 
 const findTitle = (tags) => {
-  console.log('TAGS: ' + JSON.stringify(tags));
+//   console.log('TAGS: ' + JSON.stringify(tags));
   let tag = tags.find(tag => tag.type === "search");
   if (tag) {
     return tags.find(tag => tag.type === "search");
