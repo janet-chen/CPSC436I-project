@@ -37,7 +37,6 @@ function App() {
           }}
         />
       </Switch>
-      <CPopper />
     </Router>
 
 
