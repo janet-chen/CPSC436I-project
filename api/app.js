@@ -16,6 +16,7 @@ var usersRouter = require('./routes/users');
 var favouritesRouter = require('./routes/favourites');
 var videosRouter = require('./routes/videos');
 var authRoutes = require('./routes/auth');
+var placesRouter = require('./routes/places');
 
 var dbURI = process.env.DB_URI;
 var cookieKey = process.env.cookieKey;
@@ -46,6 +47,7 @@ app.use('/users', usersRouter);
 app.use('/favourites', favouritesRouter);
 app.use('/findVideos', videosRouter);
 app.use('/auth', authRoutes);
+app.use('/findPlaces', placesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

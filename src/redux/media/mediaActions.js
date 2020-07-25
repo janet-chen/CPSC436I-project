@@ -12,7 +12,10 @@ import {
     UNSAVE_MEDIA_FAILURE,
     FETCH_VIDEOS_REQUEST,
     FETCH_VIDEOS_SUCCESS,
-    FETCH_VIDEOS_FAILURE
+    FETCH_VIDEOS_FAILURE,
+    FETCH_PLACES_REQUEST,
+    FETCH_PLACES_SUCCESS,
+    FETCH_PLACES_FAILURE
 } from './mediaTypes.js';
 
 import Unsplash, { toJson } from 'unsplash-js';
@@ -27,6 +30,7 @@ const unsplash = new Unsplash(
 const TRAVELR_API = 'http://localhost:9000';
 const FAVOURITES_URL = `${TRAVELR_API}/favourites`;
 const VIDEOS_URL = `${TRAVELR_API}/findVideos`;
+const PLACES_URL = `${TRAVELR_API}/findPlaces`;
 
 
 const fetchMediaRequest = () => {
@@ -214,6 +218,49 @@ export const fetchVideos = (query) => {
           })
           .catch(error => {
               dispatch(fetchVideosFailure(error.message));
+          })
+    }
+}
+
+const fetchPlacesRequest = () => {
+    return {
+        type: FETCH_PLACES_REQUEST
+    }
+}
+
+const fetchPlacesSuccess = content => {
+    return {
+        type: FETCH_PLACES_SUCCESS,
+        payload: content
+    }
+}
+
+const fetchPlacesFailure = error => {
+    return {
+        type: FETCH_PLACES_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchPlaces = (query) => {
+    return (dispatch) => {
+        dispatch(fetchPlacesRequest());
+        fetch(PLACES_URL, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              destination: query
+            })
+          })
+          .then(toJson)
+          .then(json => {
+              dispatch(fetchPlacesSuccess(json));
+          })
+          .catch(error => {
+              dispatch(fetchPlacesFailure(error.message));
           })
     }
 }

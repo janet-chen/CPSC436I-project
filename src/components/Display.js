@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Media from './Media';
 import { fetchFavourites } from '../redux';
-import getPlaceDetails from '../../api/routes/places';
+// import getPlaceDetails from '../../api/routes/places';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -29,7 +29,7 @@ const styles = makeStyles => ({
   // },
 });
 
-function mergeMediaAndVideos (query, media, folders, videos) {
+function mergeMediaAndVideos (query, media, folders, videos, places) {
   let mediaContent = media.map((imgInState) => {
     return <Grid item xs={4} key={imgInState.id}>
       <Media
@@ -43,20 +43,32 @@ function mergeMediaAndVideos (query, media, folders, videos) {
   let videoContent = videos.map((videoId) => {
     return <Grid item xs={6} key={videoId}>
       <iframe id='ytplayer' type='text/html' width='540' height='360'
-      src={`https://www.youtube.com/embed/${videoId}?autoplay=1&origin=http://example.com`}
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&origin=http://example.com`}
         frameBorder='0' />
     </Grid>;
   });
   let allContent = mediaContent.concat(videoContent);
+  let placesContent = places.map((place) => {
+    return <Grid item xs={6} key={place.name}>
+      <Card key='GooglePlace'>
+        <CardMedia
+          component='img'
+          height='240'
+          image={place.photo}
+          title={place.name}
+        />
+        <CardContent />
+      </Card></Grid>;
+  });
   return allContent;
 }
 
-function Display ({ query, media, folders, fetchFavourites, videos }) {
+function Display ({ query, media, folders, fetchFavourites, videos, places }) {
   useEffect(() => {
     fetchFavourites();
   }, []);
 
-  let place = getPlaceDetails();
+  // let place = getPlaceDetails();
   return (
     <Grid
       container
@@ -68,17 +80,8 @@ function Display ({ query, media, folders, fetchFavourites, videos }) {
     >
       {media.length === 0 ? (
         null
-      ) : mergeMediaAndVideos(query, media, folders, videos)
+      ) : mergeMediaAndVideos(query, media, folders, videos, places)
       }
-      <Card key='GooglePlace'>
-        <CardMedia
-          component='img'
-          height='240'
-          image={place.photo}
-          title={place.name}
-        />
-        <CardContent />
-      </Card>
     </Grid>
   );
 }
@@ -89,7 +92,8 @@ const mapStateToProps = (state) => {
     query: state.media.query,
     media: state.media.results,
     folders: state.folders.folders,
-    videos: state.videos.ids
+    videos: state.videos.ids,
+    places: state.places.places
   };
 };
 
