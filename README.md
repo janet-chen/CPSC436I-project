@@ -1,4 +1,7 @@
 # CPSC436I-project
+# Travelr
+Stuck at home? Use Travelr to plan your next adventure to literally _anywhere_. Travelr lets you organize exciting outings easily by aggregating beautiful photos, thrilling travel vlogs, and highly-rated attractions. 
+
 
 ### Teamteam
 Janet Chen, Christine Vu, Stevens Qiu, Kevin Yang
