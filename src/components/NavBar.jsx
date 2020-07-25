@@ -4,14 +4,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
-import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import travelr from '../travelr.svg';
 import Searchbar from './Searchbar';
-import { signedIn } from './Login';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PrimarySearchAppBar() {
+function PrimarySearchAppBar({signedIn}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -67,7 +66,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        {signedIn ?
+      {signedIn ?
         <div>
           <Link to="/profile" color="inherit">
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
@@ -78,11 +77,11 @@ export default function PrimarySearchAppBar() {
           <Link to="/logout" color="inherit">
             <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
           </Link>
-          </div> 
-          : <Link to="/login" color="inherit">
-            <MenuItem onClick={handleMenuClose}>Login</MenuItem>
-          </Link>
-        }
+        </div>
+        : <Link to="/login" color="inherit">
+          <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+        </Link>
+      }
     </Menu>
   );
 
@@ -95,32 +94,49 @@ export default function PrimarySearchAppBar() {
           </Link>
           <Searchbar />
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <Link to="/saved" className={classes.navButton}>
-              <Button variant="outlined" >Saved</Button>
-            </Link>
-            <Link to="/calendar" className={classes.navButton}>
-              <Button variant="outlined" >Calendar</Button>
-            </Link>
-            <Link to="/trips" className={classes.navButton}>
-              <Button variant="outlined" >Trips</Button>
-            </Link>
+          {
+            signedIn ?
+              <div className={classes.sectionDesktop}>
+                <Link to="/saved" className={classes.navButton}>
+                  <Button variant="outlined" >Saved</Button>
+                </Link>
+                <Link to="/calendar" className={classes.navButton}>
+                  <Button variant="outlined" >Calendar</Button>
+                </Link>
+                <Link to="/trips" className={classes.navButton}>
+                  <Button variant="outlined" >Trips</Button>
+                </Link>
 
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              className="MuiIconButton-colorSecondary"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                  className="MuiIconButton-colorSecondary"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div> :
+              <div className={classes.sectionDesktop}>
+                <Link to="/login" color="inherit">
+                  <Button variant="outlined" >Login</Button>
+                </Link>
+              </div>
+          }
         </Toolbar>
       </AppBar>
       {renderMenu}
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    signedIn: state.user.signedIn,
+  };
+};
+
+export default connect(mapStateToProps, null)(PrimarySearchAppBar);;
