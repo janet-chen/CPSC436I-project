@@ -74,19 +74,6 @@ export default function LandingPage() {
         justify="center"
         alignContent="center"
       >
-        <Grid item xs={4}>
-            <Card className={classes.root}>
-              <CardMedia
-                component="iframe"
-                height="237"
-                src='https://www.youtube.com/embed/5NWABrC0kOI'
-                title={"video"}
-              />
-              <CardActions>
-                <Button size="small">Magical Tearoom ASMR Ambience</Button>
-              </CardActions>
-              </Card> 
-          </Grid>
         {images.map((image) => {
           // console.log(image.location)
           return <Grid item xs={4}>
