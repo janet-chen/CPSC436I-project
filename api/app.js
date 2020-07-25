@@ -1,7 +1,6 @@
 require('dotenv').config();
 var passportSetup = require('./config/passports-setup');
 var mongoose = require('mongoose');
-var keys = require('./config/keys');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
 
@@ -16,7 +15,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var favouritesRouter = require('./routes/favourites');
 var videosRouter = require('./routes/videos');
-const authRoutes = require('./routes/auth');
+var authRoutes = require('./routes/auth');
+
+var dbURI = process.env.DB_URI;
+var cookieKey = process.env.cookieKey;
 
 var app = express();
 
@@ -28,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // connect to mongodb
-mongoose.connect(keys.mongodb.dbURI, () => {
+mongoose.connect(dbURI, () => {
   console.log('connected to mongodb');
 })
 
@@ -65,7 +67,7 @@ app.use(cookieSession({
     // one day in milliseconds
     maxAge: 24 * 60 * 60 * 1000,
     // encrypt cookie id key
-    keys: [keys.session.cookieKey]
+    keys: [cookieKey]
 }))
 
 // initialize passport
