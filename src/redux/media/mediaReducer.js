@@ -102,7 +102,7 @@ const foldersReducer = (state = initialFolders, action) => {
             state.folders
                 .find(f => f.name === action.folder)
                 .images.push(action.payload);
-            
+
             return {
                 ...state,
                 loading: false,
@@ -120,7 +120,7 @@ const foldersReducer = (state = initialFolders, action) => {
         case UNSAVE_MEDIA_SUCCESS:
             let folder = state.folders
                 .find(f => f.name === action.folder);
-            
+
             if (folder !== undefined) {
                 folder.images = folder.images.filter(img => img.id !== action.payload.id);
             }
@@ -178,5 +178,5 @@ const videosReducer = (state = initialVideos, action) => {
 export const mediaReducer = {
     media: mediaState,
     folders: foldersReducer,
-    videos: videosReducer
+    videos: videosReducer,
 };

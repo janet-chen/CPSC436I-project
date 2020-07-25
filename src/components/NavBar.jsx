@@ -101,6 +101,14 @@ export default function PrimarySearchAppBar() {
             <Link to="/calendar" className={classes.navButton}>
               <Button variant="outlined" >Calendar</Button>
             </Link>
+
+            <Link to="/trips" className={classes.navButton}>
+              <Button variant="outlined" >Trips</Button>
+            </Link>
+            <Link to="/register" className={classes.navButton}>
+              <Button variant="outlined" >Sign Up</Button>
+            </Link>
+
             <IconButton
               edge="end"
               aria-label="account of current user"
