@@ -1,5 +1,5 @@
 
-# CPSC436I Project
+# CPSC436I Project - Previous Repo
 [Frontend Repo](https://github.com/CPSC436I/travelr)
 
 [Backend Repo](https://github.com/CPSC436I/CPSC436I-Project-API)
